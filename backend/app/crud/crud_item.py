@@ -2,8 +2,8 @@ from sqlalchemy.orm import Session
 from uuid import UUID
 from typing import List, Optional
 
-from app.models.item import Item
-from app.schemas.item import ItemCreate, ItemUpdate
+from backend.app.models.item import Item
+from backend.app.schemas.item import ItemCreate, ItemUpdate
 
 class CRUDItem:
     def create_item(self, db: Session, item: ItemCreate) -> Item:
