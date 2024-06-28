@@ -3,9 +3,9 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from app.crud.crud_item import crud_item
-from app.schemas.item import Item, ItemCreate, ItemUpdate
-from app.api.deps import get_db
+from backend.app.crud.crud_item import crud_item
+from backend.app.schemas.item import Item, ItemCreate, ItemUpdate
+from backend.app.api.deps import get_db
 
 router = APIRouter()
 
