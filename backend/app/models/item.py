@@ -12,4 +12,4 @@ class Item(Base):
     name = Column(String, index=True, nullable=False)
     description = Column(String, index=True, nullable=True)
     price = Column(Integer, nullable=False)
-    quantity = Column(Integer, nullable=False)
+    quantity_in_stock = Column(Integer, nullable=False)
