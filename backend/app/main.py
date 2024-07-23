@@ -74,8 +74,8 @@ app.include_router(items.router, prefix="/api/v1", tags=["items"])
 if __name__ == "__main__":
     # mounting at the root path
     uvicorn.run(
-        app="main:app",
-        host = args.host,
+        "main:app",
+        host=args.host,
         port=int(os.getenv("PORT", 5000)),
         reload=args.mode == "dev"  # Enables auto-reloading in development mode
     )

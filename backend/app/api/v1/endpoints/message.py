@@ -1,8 +1,8 @@
 from typing import List
 from uuid import UUID
 from fastapi import APIRouter, Depends
-from ...crud import MessageService
-from ...schemas import (
+from ....crud.message import MessageService
+from ....schemas.message import (
     MessageBase,
     MessageCreate,
     MessageSchema
