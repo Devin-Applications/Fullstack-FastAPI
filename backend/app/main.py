@@ -7,11 +7,11 @@ from fastapi.responses import RedirectResponse
 from starlette.middleware.sessions import SessionMiddleware
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
-from app.core.init_settings import args, global_settings
-from app.api.v1.endpoints import message, doc, base, items
-from app.dependencies.database import init_db, AsyncSessionLocal
-from app.crud.message import create_message_dict_async
-from data.init_data import models_data
+from .core.init_settings import args, global_settings
+from .api.v1.endpoints import message, doc, base, items
+from .dependencies.database import init_db, AsyncSessionLocal
+from .crud.message import create_message_dict_async
+from .data.init_data import models_data
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -74,7 +74,7 @@ app.include_router(items.router, prefix="/api/v1", tags=["items"])
 if __name__ == "__main__":
     # mounting at the root path
     uvicorn.run(
-        app="app.main:app",
+        app="main:app",
         host = args.host,
         port=int(os.getenv("PORT", 5000)),
         reload=args.mode == "dev"  # Enables auto-reloading in development mode

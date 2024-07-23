@@ -1,8 +1,8 @@
 from typing import List
 from uuid import UUID
 from fastapi import APIRouter, Depends
-from backend.app.crud import MessageService
-from backend.app.schemas import (
+from ...crud import MessageService
+from ...schemas import (
     MessageBase,
     MessageCreate,
     MessageSchema
