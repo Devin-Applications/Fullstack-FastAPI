@@ -1,4 +1,7 @@
 import os
+from dotenv import load_dotenv
+load_dotenv()
+
 import uvicorn
 from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
@@ -11,20 +14,22 @@ from .core.init_settings import args, global_settings
 from .api.v1.endpoints import message, doc, base, items
 from .dependencies.database import init_db, AsyncSessionLocal
 from .crud.message import create_message_dict_async
-from .data.init_data import models_data
+
+print("DATABASE_URL from .env:", os.getenv("DATABASE_URL"))
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Initialize the database connection
     init_db()
 
-    # Insert the initial data
-    async with AsyncSessionLocal() as db:
-        try:
-            for raw_data in models_data:
-                await create_message_dict_async(db, raw_data)
-        finally:
-            await db.close()
+    # The following block is commented out as it depends on the removed 'models_data'
+    # # Insert the initial data
+    # async with AsyncSessionLocal() as db:
+    #     try:
+    #         for raw_data in models_data:
+    #             await create_message_dict_async(db, raw_data)
+    #     finally:
+    #         await db.close()
 
     yield
 
@@ -74,7 +79,7 @@ app.include_router(items.router, prefix="/api/v1", tags=["items"])
 if __name__ == "__main__":
     # mounting at the root path
     uvicorn.run(
-        "main:app",
+        "backend.app.main:app",
         host=args.host,
         port=int(os.getenv("PORT", 5000)),
         reload=args.mode == "dev"  # Enables auto-reloading in development mode
